@@ -1,1 +1,1 @@
-# CommonsGameServer
+# Message Server
