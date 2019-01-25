@@ -1,0 +1,11 @@
+#chat {
+    width: 100%;
+    border: 1px solid #ccc !important;
+    height:160px;
+}
+#chatEntry{
+    width: 84%;
+}
+#nameEntry{
+    width:6%;
+}

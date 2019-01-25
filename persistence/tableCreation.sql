@@ -1,0 +1,46 @@
+-- first execute:
+-- sudo service postgresql initdb
+-- sudo service postgresql start
+-- psql
+-- ALTER USER postgres WITH PASSWORD 'pass123';
+
+DROP TABLE IF EXISTS login CASCADE;
+DROP TABLE IF EXISTS game CASCADE;
+DROP TABLE IF EXISTS move CASCADE;
+DROP TABLE IF EXISTS player CASCADE;
+DROP TABLE IF EXISTS chat CASCADE;
+
+
+CREATE TABLE IF NOT EXISTS player (
+    id SERIAL UNIQUE NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS chat (
+    id SERIAL UNIQUE NOT NULL PRIMARY KEY,
+    player_id INT NOT NULL REFERENCES player(id) ON DELETE CASCADE,
+    text VARCHAR(1024) NOT NULL,
+    time TIMESTAMP DEFAULT current_timestamp
+);
+
+CREATE TABLE IF NOT EXISTS game (
+    id SERIAL UNIQUE NOT NULL PRIMARY KEY,
+    player_one_id INT NOT NULL REFERENCES player(id) ON DELETE CASCADE,
+    player_two_id INT REFERENCES player(id) ON DELETE CASCADE,
+    resource INT DEFAULT 100
+);
+
+CREATE TABLE IF NOT EXISTS move (
+    id SERIAL UNIQUE NOT NULL PRIMARY KEY,
+    player_id INT NOT NULL REFERENCES player(id) ON DELETE CASCADE,
+    game_id INT NOT NULL REFERENCES game(id) ON DELETE CASCADE,
+    harvest VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS login (
+    id SERIAL UNIQUE NOT NULL PRIMARY KEY,
+    player_id INT NOT NULL REFERENCES player(id) ON DELETE CASCADE,
+    login_time TIMESTAMP DEFAULT current_timestamp,
+    logout_time TIMESTAMP
+);

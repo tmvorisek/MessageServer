@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script src="http://localhost:8888/js"></script>
+        <style>
+            #chat {
+                width: 100%;
+                border: 1px solid #ccc !important;
+                height:160px;
+                overflow: scroll;
+            }
+            #chatEntry{
+                width: 84%;
+            }
+            #nameEntry{
+                width:6%;
+            }
+        </style>
+    </head>
+    <body>
+        <input id="nameEntry" type="text" placeholder="Name">
+        <input id="passEntry" type="password" placeholder="Password">
+        <a id="authenticate" href="javascript:webSocketConnect()">Authenticate</a>
+        <br>
+        <div id="messages" style="height:200px;background:white;color:black;"></div>
+        <input type="submit" onclick="makeMove()" value="Make A Move">
+        <br>
+        <input id="chatEntry" type="text">
+        <input id="submitChat" type="submit" value="Chat" onclick="sendChat()">
+        <a id="delete" href="javascript:deleteAccount()">Delete Account</a>
+        <div id="chat">
+        </div>
+    </body>
+</html>
